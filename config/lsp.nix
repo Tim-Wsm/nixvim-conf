@@ -31,6 +31,12 @@
         enable = true;
         package = pkgs.ocamlPackages.ocaml-lsp;
       };
+
+      # language server
+      ltex_plus = {
+        enable = true;
+        package = pkgs.ltex-ls-plus;
+      };
     };
   };
 
