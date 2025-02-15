@@ -3,13 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixvim.url = "github:nix-community/nixvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixvim,
     flake-parts,
+    nixpkgs,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
@@ -21,26 +25,42 @@
       ];
 
       perSystem = {system, ...}: let
+        # bindings to access nixvim specific scripts
         nixvimLib = nixvim.lib.${system};
         nixvim' = nixvim.legacyPackages.${system};
+
+        # use packages from flake input
+        pkgs = nixpkgs.legacyPackages.${system};
+
+        # define nixvim module based on the config in ./config
         nixvimModule = {
-          inherit system; # or alternatively, set `pkgs`
-          module = import ./config; # import the module directly
-          # You can use `extraSpecialArgs` to pass additional arguments to your module files
-          extraSpecialArgs = {
-            inherit inputs;
-          };
+          inherit pkgs; # module inherits flake packages
+          module = import ./config; # import the configuration
+          extraSpecialArgs = {inherit inputs;}; # make flake inputs accessible in config
         };
         nvim = nixvim'.makeNixvimWithModule nixvimModule;
+
+        # wrap nvim in script with dependencies in PATH
+        dependencies =
+          pkgs.lib.makeBinPath [
+          ];
+        nvimWrapped = pkgs.symlinkJoin {
+          name = "nvim";
+          paths = [nvim];
+          buildInputs = [pkgs.makeWrapper];
+          postBuild = ''
+            wrapProgram $out/bin/nvim --set PATH ${dependencies}
+          '';
+        };
       in {
+        # Run `nix flake check .` to verify that your config is not broken
         checks = {
-          # Run `nix flake check .` to verify that your config is not broken
           default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
         };
 
+        # Lets you run `nix run .` to start nixvim
         packages = {
-          # Lets you run `nix run .` to start nixvim
-          default = nvim;
+          default = nvimWrapped;
         };
       };
     };
