@@ -41,9 +41,10 @@
         nvim = nixvim'.makeNixvimWithModule nixvimModule;
 
         # wrap nvim in script with dependencies in PATH
-        dependencies =
-          pkgs.lib.makeBinPath [
-          ];
+        dependencies = pkgs.lib.makeBinPath [
+          pkgs.ripgrep
+          pkgs.alejandra
+        ];
         nvimWrapped = pkgs.symlinkJoin {
           name = "nvim";
           paths = [nvim];
