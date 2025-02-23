@@ -42,15 +42,20 @@
 
         # wrap nvim in script with dependencies in PATH
         dependencies = pkgs.lib.makeBinPath [
+          # for telescope
           pkgs.ripgrep
+          # for formating .nix files
           pkgs.alejandra
+          # as clipboard provider
+          pkgs.wl-clipboard
+          pkgs.wl-clipboard-x11
         ];
         nvimWrapped = pkgs.symlinkJoin {
           name = "nvim";
           paths = [nvim];
           buildInputs = [pkgs.makeWrapper];
           postBuild = ''
-            wrapProgram $out/bin/nvim --set PATH ${dependencies}
+            wrapProgram $out/bin/nvim --inherit-argv0 --set PATH ${dependencies}
           '';
         };
       in {
