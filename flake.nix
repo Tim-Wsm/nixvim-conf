@@ -44,7 +44,7 @@
         dependencies = [
           # for telescope
           pkgs.ripgrep
-          # for formating .nix files
+          # for formatting .nix files
           pkgs.alejandra
         ];
         nvimWrapped = pkgs.symlinkJoin {
