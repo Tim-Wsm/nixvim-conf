@@ -21,9 +21,9 @@
       # rust
       rust_analyzer = {
         enable = true;
-        installRustc = true;
-        installCargo = true;
-        installRustfmt = true;
+        installRustc = false;
+        installCargo = false;
+        installRustfmt = false;
       };
 
       # ocaml
