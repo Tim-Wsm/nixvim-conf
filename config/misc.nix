@@ -1,6 +1,6 @@
 {
   # enable orgmode plugin
-  # plugins.orgmode = {
-  #   enable = true;
-  # };
+  plugins.orgmode = {
+    enable = true;
+  };
 }
