@@ -32,6 +32,11 @@
         package = pkgs.ocamlPackages.ocaml-lsp;
       };
 
+      # c and c++
+      clangd = {
+        enable = true;
+      };
+
       # language server
       ltex_plus = {
         enable = true;
