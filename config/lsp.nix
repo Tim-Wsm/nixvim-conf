@@ -51,6 +51,12 @@
       ltex_plus = {
         enable = true;
         package = pkgs.ltex-ls-plus;
+
+        settings = {
+          ltex = {
+            language = "auto";
+          };
+        };
       };
     };
   };
@@ -95,6 +101,7 @@
     enable = true;
   };
 
+  # pretty display of diagnostic messages
   plugins.lsp-lines = {
     enable = true;
   };
