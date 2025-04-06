@@ -4,6 +4,16 @@
     enable = true;
   };
 
+  diagnostics = {
+    # enable virtual text to display diagnostic messages
+    virtual_text = true;
+    # only display virtual lines on the current line
+    # (this enables lsp-lines to be only shown on the current line)
+    virtual_lines = {
+      only_current_line = true;
+    };
+  };
+
   # lsp support
   plugins.lsp = {
     enable = true;
@@ -82,6 +92,10 @@
 
   # format on save
   plugins.lsp-format = {
+    enable = true;
+  };
+
+  plugins.lsp-lines = {
     enable = true;
   };
 }
