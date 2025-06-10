@@ -4,7 +4,7 @@
     enable = true;
   };
 
-  diagnostics = {
+  diagnostics.settings = {
     # enable virtual text to display diagnostic messages
     virtual_text = true;
     # only display virtual lines on the current line
