@@ -46,6 +46,8 @@
           pkgs.ripgrep
           # for formatting .nix files
           pkgs.alejandra
+          # for formatting .py files
+          pkgs.black
         ];
         nvimWrapped = pkgs.symlinkJoin {
           name = "nvim";
