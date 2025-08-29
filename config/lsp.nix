@@ -48,14 +48,14 @@
       };
 
       # python
-      # jedi_language_server = {
-      #   enable = true;
-      #   settings = {
-      #     formatting = {
-      #       command = ["${pkgs.black}/bin/black"];
-      #     };
-      #   };
-      # };
+      jedi_language_server = {
+        enable = true;
+        settings = {
+          formatting = {
+            command = ["${pkgs.black}/bin/black"];
+          };
+        };
+      };
 
       # language server
       ltex_plus = {
