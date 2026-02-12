@@ -39,7 +39,6 @@
       # ocaml
       ocamllsp = {
         enable = true;
-        package = pkgs.ocamlPackages.ocaml-lsp;
       };
 
       # c and c++
