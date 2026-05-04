@@ -29,8 +29,11 @@
         nixvimLib = nixvim.lib.${system};
         nixvim' = nixvim.legacyPackages.${system};
 
-        # use packages from flake input
-        pkgs = nixpkgs.legacyPackages.${system};
+        ## use packages from flake input
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {allowUnfree = true;};
+        };
 
         # define nixvim module based on the config in ./config
         nixvimModule = {
