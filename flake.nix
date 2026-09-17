@@ -45,6 +45,8 @@
 
         # wrap nvim in script with dependencies in PATH
         dependencies = [
+          # for tree-sitter
+          pkgs.tree-sitter
           # for telescope
           pkgs.ripgrep
           # for formatting .nix files
