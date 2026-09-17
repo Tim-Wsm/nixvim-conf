@@ -45,8 +45,14 @@
 
         # wrap nvim in script with dependencies in PATH
         dependencies = [
-          # for tree-sitter
+          # dependencies for tree-sitter
           pkgs.tree-sitter
+          # dependencies for snacks
+          pkgs.fd
+          pkgs.tectonic
+          pkgs.trash-cli
+          pkgs.mermaid-cli
+          pkgs.lazygit
           # for telescope
           pkgs.ripgrep
           # for formatting .nix files
