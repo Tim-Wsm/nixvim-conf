@@ -8,4 +8,9 @@
   plugins.neogit = {
     enable = true;
   };
+
+  # enable diffview plugin
+  plugins.diffview = {
+    enable = true;
+  };
 }
