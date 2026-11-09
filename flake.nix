@@ -49,7 +49,7 @@
           pkgs.tree-sitter
           # dependencies for snacks
           pkgs.fd
-          pkgs.tectonic
+          # pkgs.tectonic
           pkgs.trash-cli
           pkgs.mermaid-cli
           pkgs.lazygit
